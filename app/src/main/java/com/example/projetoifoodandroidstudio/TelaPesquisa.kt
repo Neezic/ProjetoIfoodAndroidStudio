@@ -15,6 +15,7 @@ import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,6 +38,9 @@ class TelaBuscaActivity : ComponentActivity() {
 @Preview
 @Composable
 fun TelaBusca() {
+
+    val textoBusca = remember { androidx.compose.runtime.mutableStateOf("") }
+
     Scaffold(
         bottomBar = { BottomBar() }
     ) { innerPadding ->
@@ -49,10 +53,16 @@ fun TelaBusca() {
 
             item {
                 OutlinedTextField(
-                    value = "",
-                    onValueChange = {},
+                    value = textoBusca.value,
+                    onValueChange = { textoBusca.value = it },
                     leadingIcon = {
-                        Icon(Icons.Outlined.Search, contentDescription = "Buscar")
+
+                        IconButton(onClick = {
+
+                            println("Buscando por: ${textoBusca.value}")
+                        }) {
+                            Icon(Icons.Outlined.Search, contentDescription = "Buscar")
+                        }
                     },
                     placeholder = { Text("O que vai pedir hoje?") },
                     modifier = Modifier
@@ -60,7 +70,6 @@ fun TelaBusca() {
                         .padding(10.dp)
                 )
             }
-
 
             item {
                 Box(
@@ -80,7 +89,7 @@ fun TelaBusca() {
                 }
             }
 
-            // Cupons
+
             item {
                 Spacer(Modifier.height(10.dp))
                 Text(
@@ -101,7 +110,6 @@ fun TelaBusca() {
                     CupomItem("a partir de R$20", Color(0xFFD32F2F))
                 }
             }
-
 
             item {
                 Spacer(Modifier.height(25.dp))
@@ -145,6 +153,7 @@ fun TelaBusca() {
         }
     }
 }
+
 
 @Composable
 fun CupomItem(texto: String, cor: Color) {
