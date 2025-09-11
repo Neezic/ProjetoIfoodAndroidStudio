@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ProjetoIfoodAndroidStudio</string>
+    <string name="title_activity_tela_pesquisa">TelaPesquisa</string>
+    <string name="title_activity_tela_promocoes">TelaPromocoes</string>
 </resources>
