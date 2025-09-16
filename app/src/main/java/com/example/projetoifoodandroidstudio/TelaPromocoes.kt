@@ -7,6 +7,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ConfirmationNumber
+import androidx.compose.material.icons.filled.Restaurant
+import androidx.compose.material.icons.filled.Storefront
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -32,11 +37,10 @@ fun TeladePromocoes(
             TopAppBar(
                 title = { Text("PROMOÇÕES", fontWeight = FontWeight.Bold) },
                 navigationIcon = {
-                    Box(
-                        modifier = Modifier
-                            .padding(start = 16.dp)
-                            .size(24.dp)
-                            .background(Color.Gray)
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Voltar",
+                        modifier = Modifier.padding(start = 16.dp)
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White)
@@ -81,11 +85,12 @@ fun CardDescontos() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 (1..5).forEach { _ ->
-                    Box(
+                    Icon(
+                        imageVector = Icons.Default.ConfirmationNumber,
+                        contentDescription = "Cupom",
                         modifier = Modifier
-                            .size(40.dp)
-                            .clip(CircleShape)
-                            .background(Color.Gray)
+                            .size(40.dp),
+                        tint = Color.Gray
                     )
                 }
             }
@@ -131,11 +136,15 @@ fun SecaoCupom30Reais() {
         }
         Spacer(modifier = Modifier.height(16.dp))
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Box(
+            Icon(
+                imageVector = Icons.Default.Restaurant,
+                contentDescription = "Logo de Restaurante",
                 modifier = Modifier
                     .size(60.dp)
                     .clip(CircleShape)
                     .background(Color.DarkGray)
+                    .padding(8.dp),
+                tint = Color.White
             )
             Spacer(modifier = Modifier.width(12.dp))
             Column {
@@ -160,11 +169,14 @@ fun SecaoRestaurantesComCupom() {
         Spacer(modifier = Modifier.height(16.dp))
         LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             items(5) {
-                Box(
+                Icon(
+                    imageVector = Icons.Default.Storefront,
+                    contentDescription = "Restaurante",
                     modifier = Modifier
                         .size(80.dp)
                         .clip(CircleShape)
                         .background(Color.LightGray)
+                        .padding(16.dp)
                 )
             }
         }

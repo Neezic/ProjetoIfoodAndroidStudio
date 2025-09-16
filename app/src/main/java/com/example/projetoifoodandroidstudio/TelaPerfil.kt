@@ -15,7 +15,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -99,10 +102,10 @@ fun ProfileListItem(item:ProfileItem){
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(text = item.title)
-        Box(
-            modifier = Modifier
-                .size(16.dp)
-                .background(Color.LightGray)
+        Icon(
+            imageVector = Icons.Default.ChevronRight,
+            contentDescription = "Navbar",
+            tint = Color.LightGray
         )
     }
     Divider(color = Color(0xFFF0F0F0), thickness = 1.dp)

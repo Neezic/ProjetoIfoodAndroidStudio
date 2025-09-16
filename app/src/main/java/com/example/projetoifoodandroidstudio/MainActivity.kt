@@ -12,10 +12,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.KeyboardArrowUp
+import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.ShoppingCart
+import androidx.compose.material.icons.filled.Storefront
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -23,11 +26,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.*
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.projetoifoodandroidstudio.ui.theme.ProjetoIfoodAndroidStudioTheme
 
@@ -81,7 +87,10 @@ fun BarraSuperior() {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text("Av. Francisco Kruger, 5280", fontWeight = FontWeight.Bold)
-        Box(modifier = Modifier.size(24.dp).background(Color.LightGray))
+       Icon (
+           imageVector = Icons.Outlined.Notifications,
+           contentDescription = "Notificações"
+       )
     }
 }
 
@@ -90,7 +99,7 @@ fun GridDeCategorias(categorias: List<Categoria>) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp),
         horizontalArrangement = Arrangement.SpaceAround
     ) {
         categorias.take(4).forEach { categoria ->
@@ -101,13 +110,28 @@ fun GridDeCategorias(categorias: List<Categoria>) {
 
 @Composable
 fun ItemDeCategoria(categoria: Categoria) {
+    val icon: ImageVector = when(categoria.nome){
+        "Restaurantes" -> Icons.Default.LocalDining
+        "Mercados" -> Icons.Default.LocalGroceryStore
+        "Fármacias" -> Icons.Default.LocalPharmacy
+        "Shopping" -> Icons.Default.Storefront
+        else -> Icons.Default.Storefront
+
+    }
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Box(
             modifier = Modifier
                 .size(60.dp)
                 .clip(RoundedCornerShape(8.dp))
-                .background(Color(0xFFF0F0F0))
-        )
+                .background(Color(0xFFF0F0F0)),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = categoria.nome,
+                tint = Color.DarkGray
+            )
+        }
         Spacer(modifier = Modifier.height(8.dp))
         Text(text = categoria.nome, fontSize = 12.sp, color = Color.Gray)
     }
@@ -159,11 +183,14 @@ fun LinhaDeItemDeComida(item: ItemComida) {
             .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Box(
+        Icon(
+            imageVector = Icons.Default.LocalDining,
+            contentDescription = "Imagem de Prato",
             modifier = Modifier
                 .size(70.dp)
                 .clip(RoundedCornerShape(8.dp))
                 .background(Color.LightGray)
+                .padding(8.dp)
         )
         Spacer(modifier = Modifier.width(16.dp))
         Column {
@@ -176,7 +203,7 @@ fun LinhaDeItemDeComida(item: ItemComida) {
 }
 
 @Composable
-fun BarraDeNavegacaoInferior(navController: androidx.navigation.NavController) {
+fun BarraDeNavegacaoInferior(navController: NavController) {
     NavigationBar (
         containerColor = MaterialTheme.colorScheme.surface
     ) {
