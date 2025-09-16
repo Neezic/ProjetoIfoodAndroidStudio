@@ -41,15 +41,10 @@ fun TelaBusca(modifier: Modifier = Modifier) {
 
     val textoBusca = remember { androidx.compose.runtime.mutableStateOf("") }
 
-    Scaffold(
-        bottomBar = { BottomBar() }
-    ) { innerPadding ->
-
-        LazyColumn(
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize()
-        ) {
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+    ) {
 
             item {
                 OutlinedTextField(
@@ -152,7 +147,7 @@ fun TelaBusca(modifier: Modifier = Modifier) {
             }
         }
     }
-}
+
 
 
 @Composable

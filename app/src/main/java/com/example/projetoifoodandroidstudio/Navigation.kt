@@ -33,9 +33,10 @@ fun AppNavigation(){
             composable(AppDestinations.Tela_Principal){
                 TelaPrincipal(modifier = Modifier)
             }
-            composable(AppDestinations.Promocoes){
-                TeladePromocoes(modifier = Modifier)
+            composable(AppDestinations.Promocoes) {
+                TeladePromocoes(navController = navController, modifier = Modifier)
             }
+
             composable(AppDestinations.Perfil){
                 TelaPerfil(modifier = Modifier)
             }

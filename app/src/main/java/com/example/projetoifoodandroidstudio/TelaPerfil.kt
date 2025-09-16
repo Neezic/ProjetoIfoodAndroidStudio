@@ -46,24 +46,18 @@ fun TelaPerfil(modifier: Modifier = Modifier){
         ProfileItem("Segurança"),
         ProfileItem("Sugerir restaurantes")
     )
-    Scaffold (
-        bottomBar = { BarraDeNavegacaoInferior(navController = rememberNavController()) }
-    ){
-        paddingValues ->
+    Scaffold { paddingValues ->
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
                 .background(Color.White)
         ) {
-            item{
-                ProfileHeader()
-            }
-            items(profileItem){
-                item -> ProfileListItem(item)
-            }
+            item { ProfileHeader() }
+            items(profileItem) { item -> ProfileListItem(item) }
         }
     }
+
 }
 
 @Composable
