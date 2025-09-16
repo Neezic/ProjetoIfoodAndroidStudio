@@ -2,21 +2,12 @@ package com.example.projetoifoodandroidstudio
 
 import android.provider.ContactsContract.Profile
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -30,7 +21,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.rememberNavController
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
+import com.example.projetoifoodandroidstudio.R
 import com.example.projetoifoodandroidstudio.ui.theme.ProjetoIfoodAndroidStudioTheme
 
 data class ProfileItem(val title: String)
@@ -60,24 +53,25 @@ fun TelaPerfil(modifier: Modifier = Modifier){
             items(profileItem) { item -> ProfileListItem(item) }
         }
     }
-
 }
 
 @Composable
-fun ProfileHeader(){
+fun ProfileHeader() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically) {
-        Box(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.fotoperfil),
+            contentDescription = "Foto de perfil",
             modifier = Modifier
                 .size(60.dp)
                 .clip(CircleShape)
-                .background(Color(0xFFE0E0E0))
         )
         Spacer(modifier = Modifier.width(16.dp))
-        Column{
+        Column {
             Text(
                 text = "Johnson Pinto da Silva",
                 fontWeight = FontWeight.Bold,
@@ -93,7 +87,7 @@ fun ProfileHeader(){
 }
 
 @Composable
-fun ProfileListItem(item:ProfileItem){
+fun ProfileListItem(item: ProfileItem){
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -103,8 +97,8 @@ fun ProfileListItem(item:ProfileItem){
     ) {
         Text(text = item.title)
         Icon(
-            imageVector = Icons.Default.ChevronRight,
-            contentDescription = "Navbar",
+            imageVector = Icons.Filled.ArrowForward,
+            contentDescription = "Ir para",
             tint = Color.LightGray
         )
     }
