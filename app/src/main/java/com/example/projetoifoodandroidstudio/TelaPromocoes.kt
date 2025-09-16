@@ -17,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.example.projetoifoodandroidstudio.ui.theme.ProjetoIfoodAndroidStudioTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -37,7 +38,7 @@ fun TeladePromocoes(modifier: Modifier = Modifier) {
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White)
             )
         },
-        bottomBar = { BarraDeNavegacaoInferior() }
+        bottomBar = { BarraDeNavegacaoInferior(navController = rememberNavController()) }
     ) { paddingValues ->
         Column(
             modifier = modifier
@@ -169,7 +170,7 @@ fun SecaoRestaurantesComCupom() {
 fun PreviewTelaDePromocoes() {
     ProjetoIfoodAndroidStudioTheme {
         Scaffold(
-            bottomBar = { BarraDeNavegacaoInferior() }
+            bottomBar = { BarraDeNavegacaoInferior(navController = rememberNavController()) }
         ) { padding ->
             TeladePromocoes(modifier = Modifier.padding(padding))
         }

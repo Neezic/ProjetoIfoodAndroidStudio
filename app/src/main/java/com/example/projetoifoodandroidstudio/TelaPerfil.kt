@@ -27,12 +27,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.example.projetoifoodandroidstudio.ui.theme.ProjetoIfoodAndroidStudioTheme
 
 data class ProfileItem(val title: String)
 
 @Composable
-fun ProfileScreen(modifier: Modifier = Modifier){
+fun TelaPerfil(modifier: Modifier = Modifier){
     val profileItem = listOf(
         ProfileItem("Comunidade iFood"),
         ProfileItem("Código de entrega"),
@@ -46,7 +47,7 @@ fun ProfileScreen(modifier: Modifier = Modifier){
         ProfileItem("Sugerir restaurantes")
     )
     Scaffold (
-        bottomBar = { BarraDeNavegacaoInferior() }
+        bottomBar = { BarraDeNavegacaoInferior(navController = rememberNavController()) }
     ){
         paddingValues ->
         LazyColumn(
@@ -117,6 +118,6 @@ fun ProfileListItem(item:ProfileItem){
 @Composable
 fun PreviewProfileScreen() {
     ProjetoIfoodAndroidStudioTheme {
-        ProfileScreen()
+        TelaPerfil()
     }
 }

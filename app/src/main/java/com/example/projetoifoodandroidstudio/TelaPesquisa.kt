@@ -29,7 +29,7 @@ class TelaBuscaActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MaterialTheme {
-                TelaBusca()
+                TelaBusca(modifier = Modifier)
             }
         }
     }
@@ -37,7 +37,7 @@ class TelaBuscaActivity : ComponentActivity() {
 
 @Preview
 @Composable
-fun TelaBusca() {
+fun TelaBusca(modifier: Modifier = Modifier) {
 
     val textoBusca = remember { androidx.compose.runtime.mutableStateOf("") }
 

@@ -1,5 +1,6 @@
 package com.example.projetoifoodandroidstudio
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -17,6 +18,7 @@ import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,6 +27,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.projetoifoodandroidstudio.ui.theme.ProjetoIfoodAndroidStudioTheme
 
 data class Categoria(val nome: String)
@@ -36,11 +40,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ProjetoIfoodAndroidStudioTheme {
-                Scaffold(
-                    bottomBar = { BarraDeNavegacaoInferior() }
-                ) { padding ->
-                    TelaPrincipal(modifier = Modifier.padding(padding))
-                }
+               AppNavigation()
             }
         }
     }
@@ -176,25 +176,41 @@ fun LinhaDeItemDeComida(item: ItemComida) {
 }
 
 @Composable
-fun BarraDeNavegacaoInferior() {
-    NavigationBar {
+fun BarraDeNavegacaoInferior(navController: androidx.navigation.NavController) {
+    NavigationBar (
+        containerColor = MaterialTheme.colorScheme.surface
+    ) {
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentRoute = navBackStackEntry?.destination?.route
+
         NavigationBarItem(
-            selected = true,
-            onClick = { },
+            currentRoute == AppDestinations.Tela_Principal,
+            onClick = {
+                navController.navigate(AppDestinations.Tela_Principal){
+                    launchSingleTop = true
+                }
+            },
             icon = { Icon(Icons.Default.Home, contentDescription = "Início") },
             label = { Text("Início") }
         )
         NavigationBarItem(
-            selected = false,
-            onClick = { },
+            currentRoute == AppDestinations.Pesquisa,
+            onClick = {
+                navController.navigate(AppDestinations.Pesquisa) {
+                    launchSingleTop = true
+                }
+            },
             icon = { Icon(Icons.Outlined.Search, contentDescription = "Busca") },
             label = { Text("Busca") }
         )
         NavigationBarItem(
-            selected = false,
-            onClick = { },
-            icon = { Icon(Icons.Outlined.KeyboardArrowUp, contentDescription = "Hits") },
-            label = { Text("Hits") }
+            currentRoute == AppDestinations.Promocoes,
+            onClick = {
+                navController.navigate(AppDestinations.Promocoes) {
+                    launchSingleTop = true
+                }},
+            icon = { Icon(Icons.Outlined.KeyboardArrowUp, contentDescription = "Promoções") },
+            label = { Text("Promoções") }
         )
         NavigationBarItem(
             selected = false,
@@ -203,8 +219,11 @@ fun BarraDeNavegacaoInferior() {
             label = { Text("Pedidos") }
         )
         NavigationBarItem(
-            selected = false,
-            onClick = { },
+            currentRoute == AppDestinations.Perfil,
+            onClick = {
+                navController.navigate(AppDestinations.Perfil) {
+                launchSingleTop = true
+            }},
             icon = { Icon(Icons.Default.Person, contentDescription = "Perfil") },
             label = { Text("Perfil") }
         )
@@ -215,10 +234,6 @@ fun BarraDeNavegacaoInferior() {
 @Composable
 fun DefaultPreview() {
     ProjetoIfoodAndroidStudioTheme {
-        Scaffold(
-            bottomBar = { BarraDeNavegacaoInferior() }
-        ) { padding ->
-            TelaPrincipal(modifier = Modifier.padding(padding))
-        }
+        AppNavigation()
     }
 }
