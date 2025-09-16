@@ -35,6 +35,8 @@ import androidx.navigation.NavController
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.*
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.projetoifoodandroidstudio.ui.theme.IfoodGrey
+import com.example.projetoifoodandroidstudio.ui.theme.IfoodRed
 import com.example.projetoifoodandroidstudio.ui.theme.ProjetoIfoodAndroidStudioTheme
 
 data class Categoria(val nome: String)
@@ -252,7 +254,13 @@ fun BarraDeNavegacaoInferior(navController: NavController) {
                 launchSingleTop = true
             }},
             icon = { Icon(Icons.Default.Person, contentDescription = "Perfil") },
-            label = { Text("Perfil") }
+            label = { Text("Perfil") },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = IfoodRed,
+                selectedTextColor = IfoodRed,
+                unselectedIconColor = IfoodGrey,
+                unselectedTextColor = IfoodGrey
+            )
         )
     }
 }

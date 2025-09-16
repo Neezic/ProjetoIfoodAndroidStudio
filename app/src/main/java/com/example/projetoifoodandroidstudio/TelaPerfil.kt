@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.Image
 import androidx.compose.ui.res.painterResource
 import com.example.projetoifoodandroidstudio.R
+import com.example.projetoifoodandroidstudio.ui.theme.IfoodGrey
+import com.example.projetoifoodandroidstudio.ui.theme.IfoodRed
 import com.example.projetoifoodandroidstudio.ui.theme.ProjetoIfoodAndroidStudioTheme
 
 data class ProfileItem(val title: String)
@@ -79,7 +81,7 @@ fun ProfileHeader() {
             )
             Text(
                 text = "Ver meu Clube",
-                color = Color.Gray,
+                color = IfoodGrey,
                 fontSize = 14.sp,
             )
         }

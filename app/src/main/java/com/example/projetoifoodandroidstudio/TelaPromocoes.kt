@@ -24,12 +24,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.projetoifoodandroidstudio.ui.theme.IfoodRed
 import com.example.projetoifoodandroidstudio.ui.theme.ProjetoIfoodAndroidStudioTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TeladePromocoes(
-    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -132,7 +132,7 @@ fun SecaoCupom30Reais() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text("Cupom de até R$ 30", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-            Text("Ver Mais", color = Color.Red, fontWeight = FontWeight.Bold)
+            Text("Ver Mais", color = IfoodRed, fontWeight = FontWeight.Bold)
         }
         Spacer(modifier = Modifier.height(16.dp))
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -164,7 +164,7 @@ fun SecaoRestaurantesComCupom() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text("Restaurantes com Cupom", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-            Text("Ver mais", color = Color.Red, fontWeight = FontWeight.Bold)
+            Text("Ver mais", color = IfoodRed, fontWeight = FontWeight.Bold)
         }
         Spacer(modifier = Modifier.height(16.dp))
         LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -188,7 +188,7 @@ fun SecaoRestaurantesComCupom() {
 fun PreviewTelaDePromocoes() {
     val navController = rememberNavController()
     ProjetoIfoodAndroidStudioTheme {
-        TeladePromocoes(navController = navController)
+        TeladePromocoes()
     }
 }
 
