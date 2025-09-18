@@ -22,9 +22,10 @@ class LoginViewModel : ViewModel(){
         mensagemErro = null
     }
     fun onSenhaChange(novaSenha: String){
-        email = novaSenha
+        senha = novaSenha
         mensagemErro = null
     }
+
 
     fun fazerLogin(){
         if(email.isNotBlank() && senha.isNotBlank()){
