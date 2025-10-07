@@ -5,18 +5,19 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 
 object AppDestinations{
-    const val Login = "TelaLogin"
-    const val Tela_Principal = "MainActivity"
-    const val Promocoes = "TelaPromocoes"
-    const val Perfil  = "TelaPerfil"
-    const val Pesquisa = "TelaPesquisa"
+    const val LOGIN = "TelaLogin"
+    const val TELA_PRINCIPAL = "MainActivity"
+    const val PROMOCOES = "TelaPromocoes"
+    const val PERFIL  = "TelaPerfil"
+    const val PESQUISA = "TelaPesquisa"
+    const val ENDERECOS = "TelaEnderecos"
 }
 
 @Composable
@@ -25,7 +26,7 @@ fun AppNavigation(){
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    if(currentRoute != AppDestinations.Login) {
+    if(currentRoute != AppDestinations.LOGIN) {
         Scaffold(
             bottomBar = {
                 BarraDeNavegacaoInferior(navController = navController)
@@ -45,30 +46,39 @@ fun AppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = AppDestinations.Login, // 2. Login é a nova tela inicial
+        startDestination = AppDestinations.LOGIN, // 2. Login é a nova tela inicial
         modifier = modifier
     ) {
-        composable(AppDestinations.Login) {
+        composable(AppDestinations.LOGIN) {
             TelaLogin(
                 onLoginSucess = {
-                    navController.navigate(AppDestinations.Tela_Principal){
-                        popUpTo(AppDestinations.Login){
+                    navController.navigate(AppDestinations.TELA_PRINCIPAL){
+                        popUpTo(AppDestinations.LOGIN){
                             inclusive = true
                         }
                     }
                 }
             )
         }
-        composable(AppDestinations.Tela_Principal) {
+        composable(AppDestinations.TELA_PRINCIPAL) {
             TelaPrincipal(modifier = Modifier)
         }
-        composable(AppDestinations.Promocoes) {
+        composable(AppDestinations.PROMOCOES) {
             TeladePromocoes(modifier = Modifier)
         }
-        composable(AppDestinations.Perfil) {
-            TelaPerfil(modifier = Modifier)
+        composable(AppDestinations.PERFIL) {
+            TelaPerfil(
+                modifier = Modifier,
+                navController = navController
+            )
         }
-        composable(AppDestinations.Pesquisa) {
+        composable(AppDestinations.ENDERECOS){
+            TelaEnderecos(
+                modifier = Modifier,
+                viewModel = viewModel()
+            )
+        }
+        composable(AppDestinations.PESQUISA) {
             TelaBusca(modifier = Modifier)
         }
     }

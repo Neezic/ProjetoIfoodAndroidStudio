@@ -213,9 +213,9 @@ fun BarraDeNavegacaoInferior(navController: NavController) {
         val currentRoute = navBackStackEntry?.destination?.route
 
         NavigationBarItem(
-            currentRoute == AppDestinations.Tela_Principal,
+            currentRoute == AppDestinations.TELA_PRINCIPAL,
             onClick = {
-                navController.navigate(AppDestinations.Tela_Principal){
+                navController.navigate(AppDestinations.TELA_PRINCIPAL){
                     launchSingleTop = true
                 }
             },
@@ -223,9 +223,9 @@ fun BarraDeNavegacaoInferior(navController: NavController) {
             label = { Text("Início") }
         )
         NavigationBarItem(
-            currentRoute == AppDestinations.Pesquisa,
+            currentRoute == AppDestinations.PESQUISA,
             onClick = {
-                navController.navigate(AppDestinations.Pesquisa) {
+                navController.navigate(AppDestinations.PESQUISA) {
                     launchSingleTop = true
                 }
             },
@@ -233,9 +233,9 @@ fun BarraDeNavegacaoInferior(navController: NavController) {
             label = { Text("Busca") }
         )
         NavigationBarItem(
-            currentRoute == AppDestinations.Promocoes,
+            currentRoute == AppDestinations.PROMOCOES,
             onClick = {
-                navController.navigate(AppDestinations.Promocoes) {
+                navController.navigate(AppDestinations.PROMOCOES) {
                     launchSingleTop = true
                 }},
             icon = { Icon(Icons.Outlined.KeyboardArrowUp, contentDescription = "Promoções") },
@@ -248,9 +248,9 @@ fun BarraDeNavegacaoInferior(navController: NavController) {
             label = { Text("Pedidos") }
         )
         NavigationBarItem(
-            currentRoute == AppDestinations.Perfil,
+            currentRoute == AppDestinations.PERFIL,
             onClick = {
-                navController.navigate(AppDestinations.Perfil) {
+                navController.navigate(AppDestinations.PERFIL) {
                 launchSingleTop = true
             }},
             icon = { Icon(Icons.Default.Person, contentDescription = "Perfil") },

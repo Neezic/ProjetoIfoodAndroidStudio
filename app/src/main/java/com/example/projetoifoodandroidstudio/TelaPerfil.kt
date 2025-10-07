@@ -1,6 +1,5 @@
 package com.example.projetoifoodandroidstudio
 
-import android.provider.ContactsContract.Profile
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,16 +21,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.ui.res.painterResource
-import com.example.projetoifoodandroidstudio.R
+import androidx.compose.ui.text.LinkAnnotation
+import androidx.navigation.NavHostController
 import com.example.projetoifoodandroidstudio.ui.theme.IfoodGrey
-import com.example.projetoifoodandroidstudio.ui.theme.IfoodRed
 import com.example.projetoifoodandroidstudio.ui.theme.ProjetoIfoodAndroidStudioTheme
 
 data class ProfileItem(val title: String)
 
 @Composable
-fun TelaPerfil(modifier: Modifier = Modifier){
+fun TelaPerfil(modifier: Modifier = Modifier, navController: NavHostController){
     val profileItem = listOf(
         ProfileItem("Comunidade iFood"),
         ProfileItem("Código de entrega"),
@@ -44,18 +45,22 @@ fun TelaPerfil(modifier: Modifier = Modifier){
         ProfileItem("Segurança"),
         ProfileItem("Sugerir restaurantes")
     )
-    Scaffold { paddingValues ->
+
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
                 .background(Color.White)
         ) {
             item { ProfileHeader() }
-            items(profileItem) { item -> ProfileListItem(item) }
+            items(profileItem) { item -> ProfileListItem(item = item,
+                onItemClick = {
+                    if (item.title == "Endereços") {
+                        navController.navigate(AppDestinations.ENDERECOS)
+                    }
+                }) }
         }
     }
-}
+
 
 @Composable
 fun ProfileHeader() {
@@ -89,18 +94,22 @@ fun ProfileHeader() {
 }
 
 @Composable
-fun ProfileListItem(item: ProfileItem){
+fun ProfileListItem(
+    item: ProfileItem,
+    onItemClick: () -> Unit
+){
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable (onClick = onItemClick)
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(text = item.title)
         Icon(
-            imageVector = Icons.Filled.ArrowForward,
-            contentDescription = "Ir para",
+            imageVector = Icons.Default.ChevronRight,
+            contentDescription = "Navegar",
             tint = Color.LightGray
         )
     }
@@ -109,8 +118,8 @@ fun ProfileListItem(item: ProfileItem){
 
 @Preview(showBackground = true, name = "Tela de Perfil")
 @Composable
-fun PreviewProfileScreen() {
+fun PreviewProfileScreen(navController: NavHostController) {
     ProjetoIfoodAndroidStudioTheme {
-        TelaPerfil()
+        TelaPerfil(navController = navController)
     }
 }
