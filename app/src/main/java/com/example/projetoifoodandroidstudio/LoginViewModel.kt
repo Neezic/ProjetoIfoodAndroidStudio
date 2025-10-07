@@ -17,6 +17,7 @@ class LoginViewModel : ViewModel(){
         private set
     private val _loginSucess = MutableStateFlow<Boolean>(false)
     val loginSucess = _loginSucess.asStateFlow()
+
     fun onEmailChange(novoEmail: String){
         email = novoEmail
         mensagemErro = null
