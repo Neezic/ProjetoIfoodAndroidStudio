@@ -16,6 +16,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
+import com.example.projetoifoodandroidstudio.banco.AppDatabase
+import com.example.projetoifoodandroidstudio.banco.LoginViewModel
+import com.example.projetoifoodandroidstudio.banco.LoginViewModelFactory
+import com.example.projetoifoodandroidstudio.banco.UsuarioDAO
 
 object AppDestinations {
     const val LOGIN = "TelaLogin"
@@ -144,6 +148,9 @@ fun AppNavHost(
         // Pesquisa
         composable(AppDestinations.PESQUISA) {
             TelaBusca(modifier = Modifier)
+        }
+        composable(AppDestinations.ENDERECOS) {
+            TelaEnderecos()
         }
     }
 }

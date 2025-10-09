@@ -1,4 +1,4 @@
-package com.example.projetoifoodandroidstudio
+package com.example.projetoifoodandroidstudio.banco
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow

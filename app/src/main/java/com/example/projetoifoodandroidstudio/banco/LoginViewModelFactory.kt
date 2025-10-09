@@ -1,4 +1,4 @@
-package com.example.projetoifoodandroidstudio
+package com.example.projetoifoodandroidstudio.banco
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -1,11 +1,11 @@
-package com.example.projetoifoodandroidstudio
+package com.example.projetoifoodandroidstudio.banco
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Endereco::class, Usuario::class], version = 2)
+@Database(entities = [Endereco::class, Usuario::class], version = 3)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun enderecoDAO(): EnderecoDAO
     abstract fun usuarioDAO(): UsuarioDAO
@@ -20,7 +20,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "ifood_database"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }

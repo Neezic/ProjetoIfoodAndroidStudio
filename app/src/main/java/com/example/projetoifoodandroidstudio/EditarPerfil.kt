@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import com.example.projetoifoodandroidstudio.banco.UsuarioDAO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.first
 

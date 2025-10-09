@@ -1,4 +1,4 @@
-package com.example.projetoifoodandroidstudio
+package com.example.projetoifoodandroidstudio.banco
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

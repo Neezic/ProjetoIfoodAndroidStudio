@@ -18,6 +18,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.Image
 import androidx.compose.ui.res.painterResource
+import com.example.projetoifoodandroidstudio.banco.Usuario
+import com.example.projetoifoodandroidstudio.banco.UsuarioDAO
 import com.example.projetoifoodandroidstudio.ui.theme.IfoodGrey
 
 data class ProfileItem(val title: String, val onClick: () -> Unit = {})
