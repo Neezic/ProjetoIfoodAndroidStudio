@@ -4,9 +4,7 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,12 +16,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.projetoifoodandroidstudio.ui.theme.IfoodRed
 
 @Composable
 fun TelaLogin(
     modifier: Modifier = Modifier,
-    viewModel: LoginViewModel = viewModel(),
+    viewModel: LoginViewModel,
     onLoginSucess: () -> Unit
 ) {
     val loginSuccess by viewModel.loginSucess.collectAsStateWithLifecycle()
@@ -33,14 +30,11 @@ fun TelaLogin(
         LaunchedEffect(Unit) {
             onLoginSucess()
             viewModel.onLoginHandled()
+            viewModel.limparCampos()
         }
     }
 
-
-    Surface(
-        modifier = modifier.fillMaxSize(),
-        color = Color.White
-    ) {
+    Surface(modifier = modifier.fillMaxSize(), color = Color.White) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -48,53 +42,71 @@ fun TelaLogin(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = "Bem-Vindo!",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold
+            Text("Bem-Vindo!", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Nome
+            OutlinedTextField(
+                value = viewModel.nome,
+                onValueChange = { viewModel.onNomeChange(it) },
+                label = { Text("Nome") },
+                modifier = Modifier.fillMaxWidth()
             )
-            Spacer(modifier = Modifier.height(32.dp))
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Email
             OutlinedTextField(
                 value = viewModel.email,
                 onValueChange = { viewModel.onEmailChange(it) },
-                label = { Text("email") },
+                label = { Text("Email") },
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
             )
+
             Spacer(modifier = Modifier.height(16.dp))
+
+            // Senha
             OutlinedTextField(
                 value = viewModel.senha,
                 onValueChange = { viewModel.onSenhaChange(it) },
-                label = { Text("senha") },
+                label = { Text("Senha") },
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 visualTransformation = PasswordVisualTransformation()
             )
 
-
             if (viewModel.mensagemErro != null) {
                 LaunchedEffect(viewModel.mensagemErro) {
-                    Toast.makeText(
-                        context,
-                        viewModel.mensagemErro,
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(context, viewModel.mensagemErro, Toast.LENGTH_SHORT).show()
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = viewModel.mensagemErro!!,
-                    color = IfoodRed,
+                    viewModel.mensagemErro!!,
+                    color = Color.Red,
                     modifier = Modifier.fillMaxWidth()
                 )
             }
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // Botão Login
             Button(
                 onClick = { viewModel.fazerLogin() },
                 modifier = Modifier.fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(containerColor = IfoodRed)
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
             ) {
                 Text("Entrar", color = Color.White)
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Botão Criar Conta
+            OutlinedButton(
+                onClick = { viewModel.criarConta() },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Criar Conta")
             }
         }
     }
