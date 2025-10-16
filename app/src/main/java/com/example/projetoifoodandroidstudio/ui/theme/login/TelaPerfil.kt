@@ -1,4 +1,4 @@
-package com.example.projetoifoodandroidstudio
+package com.example.projetoifoodandroidstudio.ui.theme.login
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,8 +18,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.Image
 import androidx.compose.ui.res.painterResource
-import com.example.projetoifoodandroidstudio.banco.Usuario
-import com.example.projetoifoodandroidstudio.banco.UsuarioDAO
+import com.example.projetoifoodandroidstudio.R
+import com.example.projetoifoodandroidstudio.data.local.Usuario
+import com.example.projetoifoodandroidstudio.data.local.UsuarioDAO
 import com.example.projetoifoodandroidstudio.ui.theme.IfoodGrey
 
 data class ProfileItem(val title: String, val onClick: () -> Unit = {})

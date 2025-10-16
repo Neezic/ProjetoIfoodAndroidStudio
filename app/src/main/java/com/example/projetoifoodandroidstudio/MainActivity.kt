@@ -1,6 +1,5 @@
 package com.example.projetoifoodandroidstudio
 
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,7 +11,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.KeyboardArrowUp
 import androidx.compose.material.icons.outlined.Notifications
@@ -32,12 +30,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.*
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.projetoifoodandroidstudio.ui.theme.IfoodGrey
 import com.example.projetoifoodandroidstudio.ui.theme.IfoodRed
 import com.example.projetoifoodandroidstudio.ui.theme.ProjetoIfoodAndroidStudioTheme
+import com.example.projetoifoodandroidstudio.ui.theme.navigation.AppDestinations
+import com.example.projetoifoodandroidstudio.ui.theme.navigation.AppNavigation
 
 data class Categoria(val nome: String)
 data class ItemComida(val nome: String, val preco: String, val entregaInfo: String)

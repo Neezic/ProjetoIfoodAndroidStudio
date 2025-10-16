@@ -1,4 +1,4 @@
-package com.example.projetoifoodandroidstudio.banco
+package com.example.projetoifoodandroidstudio.data.local
 
 import android.content.Context
 import androidx.room.Database

@@ -1,4 +1,4 @@
-package com.example.projetoifoodandroidstudio
+package com.example.projetoifoodandroidstudio.ui.theme.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Box
@@ -16,10 +16,18 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
-import com.example.projetoifoodandroidstudio.banco.AppDatabase
-import com.example.projetoifoodandroidstudio.banco.LoginViewModel
-import com.example.projetoifoodandroidstudio.banco.LoginViewModelFactory
-import com.example.projetoifoodandroidstudio.banco.UsuarioDAO
+import com.example.projetoifoodandroidstudio.BarraDeNavegacaoInferior
+import com.example.projetoifoodandroidstudio.TelaPrincipal
+import com.example.projetoifoodandroidstudio.data.local.AppDatabase
+import com.example.projetoifoodandroidstudio.ui.theme.login.LoginViewModel
+import com.example.projetoifoodandroidstudio.ui.theme.login.LoginViewModelFactory
+import com.example.projetoifoodandroidstudio.data.local.UsuarioDAO
+import com.example.projetoifoodandroidstudio.ui.theme.endereco.TelaEnderecos
+import com.example.projetoifoodandroidstudio.ui.theme.login.TelaEditarPerfil
+import com.example.projetoifoodandroidstudio.ui.theme.login.TelaLogin
+import com.example.projetoifoodandroidstudio.ui.theme.login.TelaPerfil
+import com.example.projetoifoodandroidstudio.ui.theme.pesquisa.TelaBusca
+import com.example.projetoifoodandroidstudio.ui.theme.promocoes.TeladePromocoes
 
 object AppDestinations {
     const val LOGIN = "TelaLogin"

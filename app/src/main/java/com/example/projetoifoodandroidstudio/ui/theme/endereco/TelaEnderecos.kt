@@ -1,4 +1,4 @@
-package com.example.projetoifoodandroidstudio
+package com.example.projetoifoodandroidstudio.ui.theme.endereco
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,8 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.projetoifoodandroidstudio.banco.Endereco
-import com.example.projetoifoodandroidstudio.banco.EnderecoViewModel
+import com.example.projetoifoodandroidstudio.data.local.Endereco
 import com.example.projetoifoodandroidstudio.ui.theme.IfoodRed
 
 @Composable

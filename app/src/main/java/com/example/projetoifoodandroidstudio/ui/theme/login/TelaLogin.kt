@@ -1,4 +1,4 @@
-package com.example.projetoifoodandroidstudio
+package com.example.projetoifoodandroidstudio.ui.theme.login
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
@@ -15,7 +15,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.projetoifoodandroidstudio.banco.LoginViewModel
 
 @Composable
 fun TelaLogin(

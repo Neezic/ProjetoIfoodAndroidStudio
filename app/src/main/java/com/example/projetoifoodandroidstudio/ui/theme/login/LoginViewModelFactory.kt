@@ -1,7 +1,8 @@
-package com.example.projetoifoodandroidstudio.banco
+package com.example.projetoifoodandroidstudio.ui.theme.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.projetoifoodandroidstudio.data.local.UsuarioDAO
 
 class LoginViewModelFactory(private val usuarioDAO: UsuarioDAO) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

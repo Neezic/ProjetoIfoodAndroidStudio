@@ -1,4 +1,4 @@
-package com.example.projetoifoodandroidstudio
+package com.example.projetoifoodandroidstudio.ui.theme.pesquisa
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel

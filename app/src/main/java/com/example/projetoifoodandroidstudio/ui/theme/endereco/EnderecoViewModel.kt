@@ -1,4 +1,4 @@
-package com.example.projetoifoodandroidstudio.banco
+package com.example.projetoifoodandroidstudio.ui.theme.endereco
 
 import android.app.Application
 import androidx.compose.runtime.getValue
@@ -6,6 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.projetoifoodandroidstudio.data.local.AppDatabase
+import com.example.projetoifoodandroidstudio.data.local.Endereco
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn

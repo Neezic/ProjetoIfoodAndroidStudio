@@ -1,4 +1,4 @@
-package com.example.projetoifoodandroidstudio.banco
+package com.example.projetoifoodandroidstudio.data.local
 
 import androidx.room.Dao
 import androidx.room.Delete
