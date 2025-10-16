@@ -4,42 +4,43 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import com.example.projetoifoodandroidstudio.data.local.UsuarioDAO
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.flow.first
 
 @Composable
 fun TelaEditarPerfil(
-    usuarioDAO: UsuarioDAO,
-    usuarioEmail: String,
+    loginViewModel: LoginViewModel,
     onUsuarioAtualizado: () -> Unit,
-    onUsuarioDeletado: () -> Unit
+    onUsuarioDeletado: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope() // CoroutineScope para launch
+    val scope = rememberCoroutineScope()
 
-    var nome by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var senha by remember { mutableStateOf("") }
-    var mensagemErro by remember { mutableStateOf<String?>(null) }
+    val usuario by loginViewModel.usuarioLogado
 
-    // Buscar dados do usuário ao carregar a tela
-    LaunchedEffect(usuarioEmail) {
-        usuarioDAO.buscarPorEmail(usuarioEmail).collect { usuario ->
-            usuario?.let {
-                nome = it.nome
-                email = it.email
-                senha = it.senha
-            }
+    if (usuario == null) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text("Carregando usuário...", color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
         }
+        return
     }
 
+    // Variáveis locais não-nulas para evitar Smart Cast
+    var nome by remember { mutableStateOf(usuario!!.nome) }
+    var email by remember { mutableStateOf(usuario!!.email) }
+    var senha by remember { mutableStateOf(usuario!!.senha) }
+    var mensagemErro by remember { mutableStateOf<String?>(null) }
+
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.Center
@@ -78,6 +79,7 @@ fun TelaEditarPerfil(
             Spacer(modifier = Modifier.height(8.dp))
         }
 
+        // Botão salvar alterações
         Button(
             onClick = {
                 scope.launch {
@@ -86,19 +88,14 @@ fun TelaEditarPerfil(
                         return@launch
                     }
 
-                    val usuarioExistente = usuarioDAO.buscarPorEmail(usuarioEmail).first()
-                    if (usuarioExistente != null) {
-                        val usuarioAtualizado = usuarioExistente.copy(
-                            nome = nome,
-                            email = email,
-                            senha = senha
-                        )
-                        usuarioDAO.atualizar(usuarioAtualizado)
-                        Toast.makeText(context, "Perfil atualizado!", Toast.LENGTH_SHORT).show()
-                        onUsuarioAtualizado()
-                    } else {
-                        mensagemErro = "Usuário não encontrado"
-                    }
+                    val usuarioAtualizado = usuario!!.copy(
+                        nome = nome,
+                        email = email,
+                        senha = senha
+                    )
+                    loginViewModel.atualizarUsuario(usuarioAtualizado)
+                    Toast.makeText(context, "Perfil atualizado!", Toast.LENGTH_SHORT).show()
+                    onUsuarioAtualizado()
                 }
             },
             modifier = Modifier.fillMaxWidth()
@@ -108,17 +105,13 @@ fun TelaEditarPerfil(
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        // Botão excluir conta
         OutlinedButton(
             onClick = {
                 scope.launch {
-                    val usuarioExistente = usuarioDAO.buscarPorEmail(usuarioEmail).first()
-                    if (usuarioExistente != null) {
-                        usuarioDAO.deletar(usuarioExistente)
-                        Toast.makeText(context, "Conta deletada!", Toast.LENGTH_SHORT).show()
-                        onUsuarioDeletado()
-                    } else {
-                        mensagemErro = "Usuário não encontrado"
-                    }
+                    loginViewModel.deletarUsuario(usuario!!)
+                    Toast.makeText(context, "Conta deletada!", Toast.LENGTH_SHORT).show()
+                    onUsuarioDeletado()
                 }
             },
             modifier = Modifier.fillMaxWidth()

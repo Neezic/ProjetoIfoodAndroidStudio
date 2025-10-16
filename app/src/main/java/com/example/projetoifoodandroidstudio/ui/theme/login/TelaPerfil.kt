@@ -10,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,21 +21,30 @@ import androidx.compose.foundation.Image
 import androidx.compose.ui.res.painterResource
 import com.example.projetoifoodandroidstudio.R
 import com.example.projetoifoodandroidstudio.data.local.Usuario
-import com.example.projetoifoodandroidstudio.data.local.UsuarioDAO
 import com.example.projetoifoodandroidstudio.ui.theme.IfoodGrey
 
 data class ProfileItem(val title: String, val onClick: () -> Unit = {})
 
 @Composable
 fun TelaPerfil(
-    usuarioDAO: UsuarioDAO,
-    usuario: Usuario,
+    viewModel: LoginViewModel,
     onLogout: () -> Unit,
     onEditarPerfil: (String) -> Unit,
     onEnderecos: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val scope = rememberCoroutineScope()
+    val usuario by viewModel.usuarioLogado
+    val usuarioLocal = usuario // Truque para smart cast
+
+    if (usuarioLocal == null) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text("Carregando usuário...", color = Color.Gray)
+        }
+        return
+    }
 
     val profileItems = listOf(
         ProfileItem("Comunidade iFood"),
@@ -47,8 +57,11 @@ fun TelaPerfil(
         ProfileItem("Configurações"),
         ProfileItem("Segurança"),
         ProfileItem("Sugerir restaurantes"),
-        ProfileItem("Editar Perfil") { onEditarPerfil(usuario.email) },
-        ProfileItem("Sair") { onLogout() }
+        ProfileItem("Editar Perfil") { onEditarPerfil(usuarioLocal.email) },
+        ProfileItem("Sair") {
+            viewModel.limparCampos()
+            onLogout()
+        }
     )
 
     Scaffold { paddingValues ->
@@ -58,7 +71,7 @@ fun TelaPerfil(
                 .padding(paddingValues)
                 .background(Color.White)
         ) {
-            item { ProfileHeader(usuario) }
+            item { ProfileHeader(usuarioLocal) }
             items(profileItems) { item ->
                 ProfileListItem(item)
             }
