@@ -1,5 +1,7 @@
 package com.example.projetoifoodandroidstudio.ui.theme.endereco
 
+import android.app.Application
+import android.view.View
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,6 +37,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.projetoifoodandroidstudio.data.local.Endereco
@@ -78,9 +81,12 @@ fun EnderecoItem(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TelaEnderecos(
-    modifier: Modifier = Modifier,
-    viewModel: EnderecoViewModel = viewModel()
+    modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    val viewModel: EnderecoViewModel = viewModel(
+        factory = ViewModelFactoryEnd(context.applicationContext as Application)
+    )
     val endereco by viewModel.enderecos.collectAsState()
     var showDialog by remember { mutableStateOf(false) }
     if (showDialog) {

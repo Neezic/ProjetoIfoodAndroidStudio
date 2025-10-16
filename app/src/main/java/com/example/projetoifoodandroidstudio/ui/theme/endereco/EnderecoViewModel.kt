@@ -1,23 +1,22 @@
 package com.example.projetoifoodandroidstudio.ui.theme.endereco
 
-import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.projetoifoodandroidstudio.data.local.AppDatabase
 import com.example.projetoifoodandroidstudio.data.local.Endereco
+import com.example.projetoifoodandroidstudio.data.local.repository.EnderecoRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class EnderecoViewModel (application:Application): AndroidViewModel(application) {
+class EnderecoViewModel(private val repository: EnderecoRepository): ViewModel() {
 
-    private val dao = AppDatabase.getDatabase(application).enderecoDAO()
-
-    val enderecos: StateFlow<List<Endereco>> = dao.getAll()
+    val enderecos: StateFlow<List<Endereco>> = repository.getAll()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000L),
@@ -80,16 +79,16 @@ class EnderecoViewModel (application:Application): AndroidViewModel(application)
         )
         viewModelScope.launch {
             if(enderecoSendoEditado == null){
-                dao.insert(endereco)
+                repository.insert(endereco)
             } else {
-                dao.update(endereco)
+                repository.update(endereco)
             }
         }
         onDialogDismissed()
     }
     fun deleteEndereco(endereco: Endereco){
         viewModelScope.launch{
-            dao.delete(endereco)
+            repository.delete(endereco)
         }
     }
 }

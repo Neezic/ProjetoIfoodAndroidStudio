@@ -16,6 +16,9 @@ class EnderecoRepository (private val enderecoDAO: EnderecoDAO) {
     }
 
     suspend fun update(endereco: Endereco) {
-
+        enderecoDAO.update(endereco)
+    }
+    suspend fun delete(endereco: Endereco) {
+        enderecoDAO.delete(endereco)
     }
 }
